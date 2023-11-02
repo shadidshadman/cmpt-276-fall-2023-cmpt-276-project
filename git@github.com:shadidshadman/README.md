@@ -8,8 +8,12 @@
 
 # Contributors
 Zheng yu oliver Liang chu
+
 Michaela Foo
+
 Shadid Shadman
+
 Jayden Thung
+
 
 # Setup Instructions
