@@ -1,4 +1,4 @@
-# Project
+# Project - Your Travel Companion Hub
 [Project requirements/instructions here](https://parsa-rajabi.github.io/cmpt-276/#/project)
 
 # Project Objectives
