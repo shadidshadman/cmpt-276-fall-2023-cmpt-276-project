@@ -4,6 +4,7 @@ import WeatherDisplay from './components/WeatherDisplay';
 import ForecastDisplay from './components/ForecastDisplay';
 import AirPollutionDisplay from './components/AirPollutionDisplay';
 import AllData from './components/AllData';
+import WeatherWidget from './components/WeatherWidget';
 import './App.css';
 
 const App = () => {
@@ -24,8 +25,9 @@ const App = () => {
         setForecastData={setForecastData} 
         setAirPollutionData={setAirPollutionData} 
       />
+      <WeatherWidget />
     </div>
   );
-}
+};
 
 export default App;
