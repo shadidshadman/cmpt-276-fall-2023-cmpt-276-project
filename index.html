@@ -16,13 +16,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 <body class="w3-light-grey">
 
 <!-- Navigation Bar -->
-<div class="w3-bar w3-white w3-border-bottom w3-xlarge">
+<header class="w3-bar w3-white w3-border-bottom w3-xlarge">
   <a href="#" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i class="fa fa-map-marker w3-margin-right"></i>Logo</b></a>
   <a href="#" class="w3-bar-item w3-button w3-right w3-hover-red w3-text-grey"><i class="fa fa-search"></i></a>
-</div>
+</header>
 
 <!-- Header -->
-<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
+<div class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
   <img class="w3-image" src="/w3images/london2.jpg" alt="London" width="1500" height="700">
   <div class="w3-display-middle" style="width:65%">
     <div class="w3-bar w3-black">
@@ -30,6 +30,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Hotel');"><i class="fa fa-bed w3-margin-right"></i>Hotel</button>
       <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Car');"><i class="fa fa-car w3-margin-right"></i>Rental</button>
     </div>
+  </div>
 
     <!-- Tabs -->
     <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
@@ -60,8 +61,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <input class="w3-input w3-border" type="text" placeholder="Pick-up point">
       <p><button class="w3-button w3-dark-grey">Search Availability</button></p>
     </div>
-  </div>
-</header>
+</div>
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:1100px;">
