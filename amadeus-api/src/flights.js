@@ -5,7 +5,7 @@ import TopSection from './top_bar';
 //used for getting the access token in order to use the APIs
 var global_token;
 const getToken = async () => {
-    const apiUrl = 'https://test.api.amadeus.com/v1/security/oauth2/token';
+    const apiUrl = 'https://api.amadeus.com/v1/security/oauth2/token';
     const clientId = 'xtU8VJK5vFf7wDosfi8Vs2PC2LahBwRZ';
     const clientSecret = 'Cc0DarAtHJsfKXZ0';
     const apikey = "DJHiMrui9ZRlRv5dfuQAzg1dnOHOpGzj";
@@ -16,7 +16,7 @@ const getToken = async () => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
+        body: `grant_type=client_credentials&client_id=${apikey}&client_secret=${apisecret}`,
       });
   
       if (response.ok) {
@@ -123,7 +123,7 @@ export default class Flights extends React.Component {
 
     // get data from apis
     async getDestinationIata() {
-      const baseURL = "https://test.api.amadeus.com/v1/reference-data";
+      const baseURL = "https://api.amadeus.com/v1/reference-data";
       const url = `${baseURL}/locations?subType=AIRPORT&keyword=${encodeURIComponent(this.state.destination)}&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL`;
       const headers = {
         Accept: "application/vnd.amadeus+json",
@@ -149,7 +149,7 @@ export default class Flights extends React.Component {
     }
 
     async getOriginIata() {
-      const baseURL = "https://test.api.amadeus.com/v1/reference-data"
+      const baseURL = "https://api.amadeus.com/v1/reference-data"
       const url = `${baseURL}/locations?subType=AIRPORT&keyword=${encodeURIComponent(this.state.from)}&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL`;
       const headers = {
         Accept: "application/vnd.amadeus+json",
@@ -176,7 +176,7 @@ export default class Flights extends React.Component {
     }
 
     async getFlightInfo() {
-      const baseURL = "https://test.api.amadeus.com/v2/shopping";
+      const baseURL = "https://api.amadeus.com/v2/shopping";
       const url = `${baseURL}/flight-offers?originLocationCode=${encodeURIComponent(this.state.fromIata.toUpperCase())}&destinationLocationCode=${encodeURIComponent(this.state.toIata.toUpperCase())}&departureDate=${encodeURIComponent(this.state.departure)}&adults=1&nonStop=false&max=30`;
       const headers = {
         Accept: "application/vnd.amadeus+json",

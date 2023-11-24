@@ -22,11 +22,11 @@ var imgList = [img1,img2,
 // to get access token
 var global_token;
 const getToken = async () => {
-    const apiUrl = 'https://test.api.amadeus.com/v1/security/oauth2/token';
+    const apiUrl = 'https://api.amadeus.com/v1/security/oauth2/token';
     const clientId = 'xtU8VJK5vFf7wDosfi8Vs2PC2LahBwRZ';
     const clientSecret = 'Cc0DarAtHJsfKXZ0';
-    //const apikey = "DJHiMrui9ZRlRv5dfuQAzg1dnOHOpGzj";
-    //const apisecret = "gxGKuMeB6yUpCq6x";
+    const apikey = "DJHiMrui9ZRlRv5dfuQAzg1dnOHOpGzj";
+    const apisecret = "gxGKuMeB6yUpCq6x";
   
     try {
       const response = await fetch(apiUrl, {
@@ -34,7 +34,7 @@ const getToken = async () => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
+        body: `grant_type=client_credentials&client_id=${apikey}&client_secret=${apisecret}`,
       });
   
       if (response.ok) {
@@ -166,7 +166,7 @@ class Hotel extends React.Component {
 
   // fetching data from amadeus api
   async searchHotel() {
-    const baseURL = "https://test.api.amadeus.com/v1/reference-data/locations";
+    const baseURL = "https://api.amadeus.com/v1/reference-data/locations";
     const url = `${baseURL}/cities?countryCode=${encodeURIComponent(this.state.countryCode.toUpperCase())}&keyword=${encodeURIComponent(this.state.city.toUpperCase())}&max=10&include=AIRPORTS`;
     const headers = {
       Accept: "application/vnd.amadeus+json",
@@ -198,7 +198,7 @@ class Hotel extends React.Component {
 
   // sample data for ratings is limited, therefore can't use sample data for testing purposes
   async getRating() {
-    const baseUrl = "https://test.api.amadeus.com/v1";
+    const baseUrl = "https://api.amadeus.com/v1";
     const url = `${baseUrl}/reference-data/locations/hotels/by-geocode?latitude=${encodeURIComponent(this.state.latitude)}&longitude=${encodeURIComponent(this.state.longitude)}&radius=20&radiusUnit=KM&ratings=2,3,4,5&hotelSource=ALL`;
     const headers = {
       Accept: "application/vnd.amadeus+json",
@@ -237,7 +237,7 @@ class Hotel extends React.Component {
       IDs.push(this.state.hotels[i].hotelId);
     }
 
-    const baseUrl = "https://test.api.amadeus.com/v3";
+    const baseUrl = "https://api.amadeus.com/v3";
     const IdList = IDs.join(',');
     const URL = `${baseUrl}/shopping/hotel-offers?hotelIds=${encodeURIComponent(IdList)}&checkInDate=${encodeURIComponent(this.state.checkIn)}&checkOutDate=${encodeURIComponent(this.state.checkOut)}&roomQuantity=1&currency=CAD&paymentPolicy=NONE&bestRateOnly=false`;    
     const headers = {
