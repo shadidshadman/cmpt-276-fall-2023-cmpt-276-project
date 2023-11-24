@@ -7,6 +7,7 @@ import AllData from './components/AllData';
 import './App.css';
 
 // A simple app that uses the Open Weather API to display the current weather, forecast, and air pollution data for a given city.
+
 const App = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
