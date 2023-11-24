@@ -1,12 +1,97 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.weather-widgets {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.weather-widget {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.weather-widget h2 {
+  margin: 0 0 10px;
+  color: #333;
+  font-size: 24px;
+}
+
+.weather-widget p {
+  margin: 0 0 10px;
+  color: #666;
+  font-size: 18px;
+}
+
+.temperature {
+  font-size: 48px;
+  font-weight: bold;
+  color: #333;
+}
+
+.forecast-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.forecast-item:last-child {
+  border-bottom: none;
+}
+
+.air-pollution {
+  background-color: #ffdddd;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+  color: #333;
+}
+
+.city-name {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Table styles */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-th, td {
+table, th, td {
   border: 1px solid #ddd;
-  padding: 8px;
+}
+
+th, td {
+  padding: 15px;
   text-align: center;
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff;
 }
 
 tr:nth-child(even) {
@@ -16,4 +101,39 @@ tr:nth-child(even) {
 th {
   background-color: #4CAF50;
   color: white;
+}
+
+.weather-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.weather-icon img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .weather-widget {
+    padding: 10px;
+  }
+
+  .weather-widget h2 {
+    font-size: 20px;
+  }
+
+  .weather-widget p {
+    font-size: 16px;
+  }
+
+  table, th, td {
+    font-size: 14px;
+  }
 }
