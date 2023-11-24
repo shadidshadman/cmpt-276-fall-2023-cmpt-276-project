@@ -7,6 +7,7 @@ import AllData from './components/AllData';
 import WeatherWidget from './components/WeatherWidget';
 import './App.css';
 
+// An app that displays the weather, forecast, and air pollution data for a city
 const App = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
