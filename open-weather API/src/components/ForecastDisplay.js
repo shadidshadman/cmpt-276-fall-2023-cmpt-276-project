@@ -29,7 +29,17 @@ const ForecastDisplay = ({ forecastData }) => {
                 <td>{new Date(data.dt * 1000).toLocaleDateString()}</td>
                 <td>{forecastTime}</td>
                 <td>{Math.round(data.main.temp)}°C</td>
-                <td>{data.weather[0].description}</td>
+                <td>
+                {data.weather.map((weather, index) => (
+                    <div key={index}>
+                      <img 
+                        src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`} 
+                        alt={weather.description}
+                      />
+                      <p>{weather.description}</p>
+                    </div>
+                  ))}
+                </td>
                 <td>{data.wind.speed} m/s</td>
                 <td>{data.clouds.all}%</td>
                 <td>{data.pop}%</td>
