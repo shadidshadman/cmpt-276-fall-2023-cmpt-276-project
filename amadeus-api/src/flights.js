@@ -1,7 +1,6 @@
 import React from 'react'
 import './App.css';
-import TopSection from './top_bar.js';
-import img from "./2.jpg";
+import TopSection from './top_bar';
 
 var global_token;
 const getToken = async () => {
@@ -179,7 +178,7 @@ export default class Flights extends React.Component {
 
     async getFlightInfo() {
       const baseURL = "https://test.api.amadeus.com/v2/shopping";
-      const url = `${baseURL}/flight-offers?originLocationCode=${encodeURIComponent(this.state.fromIata.toUpperCase())}&destinationLocationCode=${encodeURIComponent(this.state.toIata.toUpperCase())}&departureDate=${encodeURIComponent(this.state.departure)}&adults=1&nonStop=false&max=10`;
+      const url = `${baseURL}/flight-offers?originLocationCode=${encodeURIComponent(this.state.fromIata.toUpperCase())}&destinationLocationCode=${encodeURIComponent(this.state.toIata.toUpperCase())}&departureDate=${encodeURIComponent(this.state.departure)}&adults=1&nonStop=false&max=30`;
       const headers = {
         Accept: "application/vnd.amadeus+json",
         Authorization: `Bearer ${global_token}`
@@ -234,23 +233,6 @@ export default class Flights extends React.Component {
             }
           }
         }
-
-        /*for(let i = 0; i < data.length; i++) {
-          for(let k = 0; k < data[i].length; k++) {
-            for(let j = 0; j < this.state.fromIata.length; j ++) {
-              if(data[i][k].itineraries[0].segments[0].departure.iataCode === this.state.fromIata[j].iataCode) {
-                res.push(data[i][k]);
-                res[index].originAirport = this.state.fromIata[j].name;
-                res[index].destinationAirport = this.state.toName;
-                res[index].fromCityName = this.state.fromIata[j].cityName;
-                res[index].toCityName = this.state.toCity;
-                console.log("hello");
-                index++;
-                break;
-              }
-            }
-          }
-        }*/
         return res;
     }
     render() {
@@ -264,25 +246,35 @@ export default class Flights extends React.Component {
             destination = {this.destination} handleSubmit = {this.handleSubmit} getDeparture = {this.getDeparture}
             departure = {this.departure}
             />
-            <Filters />
-            <div className= "scrollable-container">
-            <div className="hotel-output">
-            <ul className='horizontal-list'>
-         
-            {this.getResult().map(element => (
-            <li className = "list-element" key = {element}>
-            <img src = {img} alt = "hotel" className = "hotel-image" />
-              <p>From: {element.fromCityName} - {element.originAirport} </p>
-              <p>To: {element.toCityName} - {element.destinationAirport}</p>
-              <span className = "rating">
-                <p>price: ${element.price.grandTotal} {element.price.currency}</p>
-              </span>
-              <p>Plane departure: {element.itineraries[0].segments[0].departure.at}</p>
-              <p>Plane arrival: {element.itineraries[0].segments[element.itineraries[0].segments.length - 1].arrival.at}</p>
-            </li>
-            ))}
-          </ul>
-        </div>
+            <div className = "flight-table">
+                {this.getResult().length > 0 && (
+                    <table bgcolor='black'>
+                        <thead>
+                            <tr id="table-head">
+                                <th>origin</th>
+                                <th>Airport</th>
+                                <th>Destination</th>
+                                <th>Airport</th>
+                                <th>Price</th>
+                                <th>Departure</th>
+                                <th>Arrival</th>
+                            </tr>
+                        </thead>
+                        <tbody id = "table-body">
+                            {this.getResult().map((element, index) => (
+                                <tr bgcolor = 'white' key={index}>
+                                    <td>{element.fromCityName}</td> 
+                                    <td>{element.originAirport} </td>
+                                    <td>{element.toCityName}</td> 
+                                    <td>{element.destinationAirport}</td>
+                                    <td>${element.price.grandTotal} {element.price.currency}</td>
+                                    <td>{element.itineraries[0].segments[0].departure.at}</td>
+                                    <td>{element.itineraries[0].segments[element.itineraries[0].segments.length - 1].arrival.at}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
             </div>
             
         </>

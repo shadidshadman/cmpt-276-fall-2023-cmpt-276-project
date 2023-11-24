@@ -1,9 +1,24 @@
 import React from 'react'
 import './App.css';
 import TopSection from './top_bar';
-import img from "./2.jpg";
+import {img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9} from './images';
 
-//WATCHPACK_POLLING=true && 
+var imgList = [img1,img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9];
 // to get access token
 var global_token;
 const getToken = async () => {
@@ -37,7 +52,7 @@ const getToken = async () => {
 
 
 function SearchBar(props) {
-  const { city, handleChange, handleSubmit, handleCountryCode, countryCode, } = props;
+  const { city, handleChange, handleSubmit, handleCountryCode, countryCode,handleCheckIn,handleCheckOut,checkIn,checkOut } = props;
   return (
     <form className = "hotel-search-form" onSubmit = {handleSubmit}>
       <div className='new-search-container'>
@@ -54,6 +69,20 @@ function SearchBar(props) {
           placeholder = "enter country code e.g CA"
             id = "country-code" 
             value = {countryCode} />
+            <br />
+            <input 
+          type = "text" 
+          placeholder='Check in yyyy-mm-dd'
+          value = {checkIn}
+          onChange={handleCheckIn}
+          />
+          <input 
+          type = "text" 
+          placeholder='Check out yyyy-mm-dd'
+          value = {checkOut}
+          onChange={handleCheckOut}
+          />
+
         </div>
         <button className='hotel-btn' type = "submit">Search</button>
       </div>
@@ -84,7 +113,10 @@ class Hotel extends React.Component {
       hotelContent: [],
       hotelPrice: [], // get price
       longitude : "",
-      latitude : ""
+      latitude : "",
+
+      checkIn : "",
+      checkOut : ""
     };
     // so that we can use "this" keyword in given methods
     this.handleChange = this.handleChange.bind(this);
@@ -92,9 +124,22 @@ class Hotel extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCountryCode = this.handleCountryCode.bind(this);
     this.getRating = this.getRating.bind(this);
-
+    this.handleCheckIn = this.handleCheckIn.bind(this);
+    this.handleCheckOut = this.handleCheckOut.bind(this);
   }
   
+  handleCheckIn(event) {
+    this.setState({
+      checkIn : event.target.value
+    });
+  }
+
+  handleCheckOut(event) {
+    this.setState({
+      checkOut : event.target.value
+    });
+  }
+
   // when text is entered into input, city is given the text
   handleChange(event) {
     this.setState({
@@ -180,7 +225,7 @@ class Hotel extends React.Component {
 
   async getPrice() {
     let len = 0;
-    //IdList string may not exceed 2048 bytes or else api will not work
+    //IdList string may not exceed 2048 bytes or else api will not work therefore cannot have len too big
     if(this.state.hotels.length > 175) {
       len = 175;
     }
@@ -194,7 +239,7 @@ class Hotel extends React.Component {
 
     const baseUrl = "https://test.api.amadeus.com/v3";
     const IdList = IDs.join(',');
-    const URL = `${baseUrl}/shopping/hotel-offers?hotelIds=${encodeURIComponent(IdList)}&checkInDate=2023-11-22&roomQuantity=1&paymentPolicy=NONE&bestRateOnly=false`;    //const URL = `${baseUrl}/shopping/hotel-offers?hotelIds=${encodeURIComponent(hotelIdList)}&checkInDate=2023-11-22&roomQuantity=1&paymentPolicy=NONE&bestRateOnly=false`;
+    const URL = `${baseUrl}/shopping/hotel-offers?hotelIds=${encodeURIComponent(IdList)}&checkInDate=${encodeURIComponent(this.state.checkIn)}&checkOutDate=${encodeURIComponent(this.state.checkOut)}&roomQuantity=1&currency=CAD&paymentPolicy=NONE&bestRateOnly=false`;    
     const headers = {
       Accept: "application/vnd.amadeus+json",
       Authorization: `Bearer ${global_token}`
@@ -229,25 +274,23 @@ class Hotel extends React.Component {
                 } 
             }
         }
-    console.log("update9");
     return (
       <>
         <TopSection />
         <SearchBar city = {this.state.city} handleChange = {this.handleChange}
         handleSubmit = {this.handleSubmit} handleCountryCode = {this.handleCountryCode}
-        countryCode = {this.state.countryCode}
+        countryCode = {this.state.countryCode} checkIn = {this.state.checkIn} checkOut = {this.state.checkOut}
+        handleCheckIn = {this.handleCheckIn} handleCheckOut = {this.handleCheckOut}
         />
         <Filters />
+
+        {/*the scrollable horizontal list*/}
         <div className= "scrollable-container">
         <div className="hotel-output">
           <ul className='horizontal-list'>
-          {/*arr.map(element => (
-            <li key = {element}>Testing this in order to work</li>
-          ))*/}
-          {/*<img src = {img} alt = "hotel" />*/}
-          {res.map(element => (
+          {res.map((element,index) => (
             <li className = "list-element" key = {element}>
-            <img src = {img} alt = "hotel" className = "hotel-image" />
+            <img src = {imgList[index % 9]} alt = "hotel" className = "hotel-image" />
               <p>{element.hotel.cityCode} - {element.hotel.name} </p>
               <span className = "rating">
                 <p>ratings: {element.rating}/5 </p>
