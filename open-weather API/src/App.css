@@ -17,3 +17,10 @@ th {
   background-color: #4CAF50;
   color: white;
 }
+
+.weather-widgets {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
