@@ -25,7 +25,11 @@ const App = () => {
         setForecastData={setForecastData} 
         setAirPollutionData={setAirPollutionData} 
       />
-      <WeatherWidget />
+      <WeatherWidget cityId="6173331" /> {/* Vancouver */}
+      <WeatherWidget cityId="5128581" /> {/* New York */}
+      <WeatherWidget cityId="2643743" /> {/* London */}
+      <WeatherWidget cityId="2950159" /> {/* Berlin */}
+      <WeatherWidget cityId="2147714" /> {/* Sydney */}
     </div>
   );
 };
