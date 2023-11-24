@@ -1,6 +1,10 @@
 import React from 'react';
 
 const WeatherDisplay = ({ weatherData }) => {
+  if (!weatherData) {
+    return null;
+  }
+
   return (
     <div>
       <h2>Current Weather in {weatherData.name}</h2>
