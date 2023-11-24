@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css';
 import TopSection from './top_bar';
 
+//used for getting the access token in order to use the APIs
 var global_token;
 const getToken = async () => {
     const apiUrl = 'https://test.api.amadeus.com/v1/security/oauth2/token';
@@ -9,7 +10,6 @@ const getToken = async () => {
     const clientSecret = 'Cc0DarAtHJsfKXZ0';
     const apikey = "DJHiMrui9ZRlRv5dfuQAzg1dnOHOpGzj";
     const apisecret = "gxGKuMeB6yUpCq6x";
-  
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -32,17 +32,9 @@ const getToken = async () => {
     }
   };
 
-function Filters() {
-  return (
-    <div class = "filter">
-      <h1>Hotels</h1>
-      <button id = "filter-btn">Filter</button>
-    </div>
-  );
-}
-
 function SearchBar(props) {
-   const {toDestination,fromDestination,from,destination,handleSubmit,getDeparture,departure} = props;
+   const {toDestination,fromDestination,from,
+    destination,handleSubmit,getDeparture,departure} = props;
     return (
       <form className = "hotel-search-form" onSubmit={handleSubmit}>
         <div className='new-search-container'>
@@ -74,6 +66,7 @@ function SearchBar(props) {
 export default class Flights extends React.Component {
     constructor(props) {
         super(props);
+        // member variables
         this.state = {
           destination: "",
           from: "",
@@ -87,11 +80,10 @@ export default class Flights extends React.Component {
           toCity : "",
 
           departure : "",
-          fromInfo : [],
-          toInfo : [],
 
           flightInfo : []
         };
+        // allows the functions to use the "this" keyword
         this.fromDestination = this.fromDestination.bind(this);
         this.toDestination = this.toDestination.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -102,25 +94,34 @@ export default class Flights extends React.Component {
         this.getResult = this.getResult.bind(this);
     }
 
-    // need to get the city and airport name from api
-   async handleSubmit(event) {
+    // initiates the api calls, they're all chained together
+     handleSubmit(event) {
       event.preventDefault();
       getToken().then(token =>{
         global_token = token;
-        //this.getOriginIata();
         this.getDestinationIata();
-        //this.getFlightInfo();
       }).catch(error => {console.error("error couldn't get token", error)});
       
     }
-    
+
+    // collect data to place into the api url
     getDeparture(event) {
       this.setState({
         departure : event.target.value
       });
     }
+    fromDestination(event) {
+      this.setState({
+        from: event.target.value
+      });
+    }
+    toDestination(event) {
+      this.setState({
+        destination: event.target.value
+      });
+    }
 
-
+    // get data from apis
     async getDestinationIata() {
       const baseURL = "https://test.api.amadeus.com/v1/reference-data";
       const url = `${baseURL}/locations?subType=AIRPORT&keyword=${encodeURIComponent(this.state.destination)}&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL`;
@@ -138,7 +139,6 @@ export default class Flights extends React.Component {
         this.setState({
           toIata : content.data[0].iataCode,
           toName : content.data[0].name,
-          toInfo : content.data,
           toCity : content.data[0].address.cityName
         }, () => {
         });
@@ -164,7 +164,6 @@ export default class Flights extends React.Component {
         this.setState({
           fromIata : content.data[0].iataCode,
           fromName : content.data[0].name,
-          fromInfo : content.data,
           fromCity : content.data[0].address.cityName
         }, () => {
           this.getFlightInfo();
@@ -202,34 +201,25 @@ export default class Flights extends React.Component {
         console.error("couldn't retrieve flight info", error);
       }
     }
+    // done getting info from apis
 
-    fromDestination(event) {
-      this.setState({
-        from: event.target.value
-      });
-    }
-    toDestination(event) {
-      this.setState({
-        destination: event.target.value
-      });
-    }
 
+    // parsing and organize data inorder to get it into printable format
     getResult() {
-     // console.log(this.state.flightInfo[0].itineraries[0].segments.length);
         var res = [];
         let index = 0;
         for(let i = 0; i < this.state.flightInfo.length; i++) {
           let seg_len = this.state.flightInfo[i].itineraries[0].segments.length;
           for(let k = 0; k < seg_len; k++) {
-          if(this.state.flightInfo[i].itineraries[0].segments[0].departure.iataCode === this.state.fromIata &&
-            this.state.flightInfo[i].itineraries[0].segments[seg_len - 1].arrival.iataCode === this.state.toIata) {
-            res.push(this.state.flightInfo[i]);
-            res[index].originAirport = this.state.fromName;
-            res[index].destinationAirport = this.state.toName;
-            res[index].fromCityName = this.state.fromCity;
-            res[index].toCityName = this.state.toCity;
-            index++;
-            break;
+            if(this.state.flightInfo[i].itineraries[0].segments[0].departure.iataCode === this.state.fromIata &&
+              this.state.flightInfo[i].itineraries[0].segments[seg_len - 1].arrival.iataCode === this.state.toIata) {
+              res.push(this.state.flightInfo[i]);
+              res[index].originAirport = this.state.fromName;
+              res[index].destinationAirport = this.state.toName;
+              res[index].fromCityName = this.state.fromCity;
+              res[index].toCityName = this.state.toCity;
+              index++;
+              break;
             }
           }
         }
@@ -237,8 +227,8 @@ export default class Flights extends React.Component {
     }
     render() {
         
-        //let res = this.getResult();
         // toDestination,fromDestination,from,destination,handleSubmit,getDeparture,departure
+        //rendering info onto screen
         return (
         <>
             <TopSection />
@@ -246,6 +236,7 @@ export default class Flights extends React.Component {
             destination = {this.destination} handleSubmit = {this.handleSubmit} getDeparture = {this.getDeparture}
             departure = {this.departure}
             />
+            {/*NOTE: should probaly place into separate member function/component at a later date*/}
             <div className = "flight-table">
                 {this.getResult().length > 0 && (
                     <table bgcolor='black'>
