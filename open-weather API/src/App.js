@@ -6,6 +6,7 @@ import AirPollutionDisplay from './components/AirPollutionDisplay';
 import AllData from './components/AllData';
 import './App.css';
 
+// Simple app that displays weather data from the Open Weather API
 const App = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
