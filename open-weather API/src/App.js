@@ -4,9 +4,8 @@ import WeatherDisplay from './components/WeatherDisplay';
 import ForecastDisplay from './components/ForecastDisplay';
 import AirPollutionDisplay from './components/AirPollutionDisplay';
 import AllData from './components/AllData';
+import WeatherWidget from './components/WeatherWidget';
 import './App.css';
-
-// A simple app that uses the Open Weather API to display the current weather, forecast, and air pollution data for a given city.
 
 const App = () => {
   const [city, setCity] = useState('');
@@ -26,8 +25,13 @@ const App = () => {
         setForecastData={setForecastData} 
         setAirPollutionData={setAirPollutionData} 
       />
+      <WeatherWidget cityId='6173331' /> {/* Vancouver */}
+      <WeatherWidget cityId='5128581' /> {/* New York */}
+      <WeatherWidget cityId='2643743' /> {/* London */}
+      <WeatherWidget cityId='2950159' /> {/* Berlin */}
+      <WeatherWidget cityId='2147714' /> {/* Sydney */}
     </div>
   );
-}
+};
 
 export default App;

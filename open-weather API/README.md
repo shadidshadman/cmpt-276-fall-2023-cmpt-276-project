@@ -1,3 +1,7 @@
+# Building Note
+
+Note that for keeping things not bloated I have note included my local node_modules folder (which is thousands of files since I used Create React App), to build the application and run it on your ends then I believe running `npm install` will allow for automatic grabbing/installation of the required dependencies, which had been indicated in package.json and package-lock.json.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
