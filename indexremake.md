@@ -24,7 +24,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
-  <img class="w3-image" src="/photos/travel.jpg" alt="travelbg" width="1500" height="700">
+  <img class="w3-image" src="travel.jpg" alt="travelbg" width="1500" height="700">
   <div class="w3-display-middle" style="width:65%">
     <div class="w3-bar w3-black">
       <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Flight');"><i class="fa fa-plane w3-margin-right"></i>Flight</button>
@@ -70,16 +70,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
           <input class="w3-input w3-border" type="number" value="0" name="Kids" min="0" max="6">
           </div>
         </div>
-        <p><a href="hotel.html" class="w3-button w3-dark-grey">Search for Hotels</a></p>
-
       </div>
+      <p><a href="hotel.html" class="w3-button w3-dark-grey">Search for Hotels</a></p>
     </div>
 
     <div id="Weather" class="w3-container w3-white w3-padding-16 myLink">
       <h3>Know what weather to pack for!</h3>
       <input class="w3-input w3-border" type="text" placeholder="Location">
-      <p><a href="weather.html" class="w3-button w3-dark-grey">Search weather</a></p>
+      
     </div>
+    <p><a href="weather.html" class="w3-button w3-dark-grey">Search weather</a></p>
   </div>
 </header>
 
@@ -94,7 +94,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 <div class="w3-row-padding w3-text-white w3-large">
   <div class="w3-half w3-margin-bottom">
     <div class="w3-display-container">
-      <img src="/photos/vancouver.jpg" alt="Vancouver" style="width:100%">
+      <img src="vancouver.jpg" alt="Vancouver" style="width:100%">
       <span class="w3-display-bottomleft w3-padding">Vancouver</span>
     </div>
   </div>
@@ -102,13 +102,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-half w3-margin-bottom">
         <div class="w3-display-container">
-          <img src="/photos/newyork.jpg" alt="New York" style="width:100%">
+          <img src="newyork.jpg" alt="New York" style="width:100%">
           <span class="w3-display-bottomleft w3-padding">New York</span>
         </div>
       </div>
       <div class="w3-half w3-margin-bottom">
         <div class="w3-display-container">
-          <img src="/photos/singapore.jpg" alt="Singapore" style="width:100%">
+          <img src="singapore.jpg" alt="Singapore" style="width:100%">
           <span class="w3-display-bottomleft w3-padding">Singapore</span>
         </div>
       </div>
@@ -116,13 +116,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-half w3-margin-bottom">
         <div class="w3-display-container">
-          <img src="/photos/thailand.jpg" alt="thailand" style="width:100%">
+          <img src="thailand.jpg" alt="thailand" style="width:100%">
           <span class="w3-display-bottomleft w3-padding">Thailand</span>
         </div>
       </div>
       <div class="w3-half w3-margin-bottom">
         <div class="w3-display-container">
-          <img src="/photos/philippeans.jpg" alt="Philippines" style="width:100%">
+          <img src="philippeans.jpg" alt="Philippines" style="width:100%">
           <span class="w3-display-bottomleft w3-padding">Philippines</span>
         </div>
       </div>
@@ -137,7 +137,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </div>
 <div class="w3-row-padding">
   <div class="w3-half w3-margin-bottom">
-    <img src="/photos/norway.jpg" alt="Norway" style="width:100%">
+    <img src="norway.jpg" alt="Norway" style="width:100%">
     <div class="w3-container w3-white">
       <h3>Flakstad Island, Norway</h3>
       <p class="w3-opacity">Roundtrip from $150 CAD</p>
@@ -146,7 +146,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     </div>
   </div>
   <div class="w3-half w3-margin-bottom">
-    <img src="/photos/bali.jpg" alt="Bali" style="width:100%">
+    <img src="bali.jpg" alt="Bali" style="width:100%">
     <div class="w3-container w3-white">
       <h3>Bali, Indonesia</h3>
       <p class="w3-opacity">One-way from $129 CAD</p>
