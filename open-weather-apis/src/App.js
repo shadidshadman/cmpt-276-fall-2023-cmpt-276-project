@@ -13,6 +13,7 @@ const App = () => {
   const [airPollutionData, setAirPollutionData] = useState(null);
 
   return (
+    
     <div className="App">
       <SearchBar setCity={setCity} />
       <WeatherDisplay weatherData={weatherData} />
