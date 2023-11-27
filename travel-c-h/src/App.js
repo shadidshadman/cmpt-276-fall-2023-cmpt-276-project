@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import SearchBar from './components/SearchBar';
+import WeatherDisplay from './components/WeatherDisplay';
+import ForecastDisplay from './components/ForecastDisplay';
+import AirPollutionDisplay from './components/AirPollutionDisplay';
+import AllData from './components/AllData';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [city, setCity] = useState('');
+  const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
+  const [airPollutionData, setAirPollutionData] = useState(null);
+
   return (
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchBar setCity={setCity} />
+      <WeatherDisplay weatherData={weatherData} />
+      <ForecastDisplay forecastData={forecastData} />
+      <AirPollutionDisplay airPollutionData={airPollutionData} />
+      <AllData 
+        city={city} 
+        setWeatherData={setWeatherData} 
+        setForecastData={setForecastData} 
+        setAirPollutionData={setAirPollutionData} 
+      />
     </div>
+    
   );
 }
 
