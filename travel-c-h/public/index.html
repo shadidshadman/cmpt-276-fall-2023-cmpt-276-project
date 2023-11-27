@@ -64,60 +64,62 @@
           <h3>Travel the world with ease</h3>
               <div class="w3-row-padding" style="margin:0 -16px;">
                   <div class="w3-half">
-                  <label>From</label>
-                  <input class="w3-input w3-border" type="text" placeholder="Departing from">
+                    <label>Are you ready?!</label>
+                    
                   </div>
-                  <div class="w3-half">
-                  <label>To</label>
-                  <input class="w3-input w3-border" type="text" placeholder="Arriving at">
-                  </div>
+              <p><a  href="#FlightSearch" class="w3-button w3-dark-grey" >Search to start your dream vacation</a></p>
               </div>
-              <p><a  class="w3-button w3-dark-grey" >Search and find dates</a></p>
-          </div>
+        </div>
   
           <div id="Hotel" class="w3-container w3-white w3-padding-16 myLink">
               <h3>Book your hotel</h3>
-              <div class="w3-row-padding" style="margin:0 -16px;">
-                  <div class="w3-half">
-                  <label>Location</label>
-                  <input class="w3-input w3-border" type="text" placeholder="Location">
-                  </div>
+              
   
-                  <div class="w3-half">
-                      <label># of People</label>
-                      <input class="w3-input w3-border" type="number" placeholder="# of people">
-                      </div>
-  
-                  <div class="w3-half">
-                  <label>Check In</label>
-                  <input class="w3-input w3-border" type="text" placeholder="YYYY MM DD">
-                  </div>
-  
-                  <div class="w3-half">
-                      <label>Check Out</label>
-                      <input class="w3-input w3-border" type="text" placeholder="YYYY MM DD">
-                  </div>               
-              </div>
-  
-              <p><a href="hotel.html" class="w3-button w3-dark-grey" >Search and find dates</a></p>
+              <p><a href="#hotelSearch" class="w3-button w3-dark-grey" >Search and find dates</a></p>
           </div>
   
           <div id="Weather" class="w3-container w3-white w3-padding-16 myLink">
               <h3>What weather are you packing for?</h3>
               <div class="w3-row-padding" style="margin:0 -16px;">
                   <div class="w3-half">
-                      <label>Location</label>
-                      <div id = "searchBarWeather"></div>
+                      <label>Click here to Start!</label>
                   </div>
               </div>
-              <p><a href="#" class="w3-button w3-margin-bottom w3-dark-grey">Search</a></p>
+              <p><a href="#weatherSearch" class="w3-button w3-margin-bottom w3-dark-grey">Search</a></p>
           </div>
     </div>
   </header>
 
 
+  
+
+
       <!-- Page content -->
 <div class="w3-content" style="max-width:1100px;">
+ 
+
+<div id = "hotel" class="w3-container">
+  <div class="w3-panel w3-padding-16 w3-black w3-opacity w3-card w3-hover-opacity-off">
+    <h2>Find out what hotel you are staying at!</h2>
+    <label>Enter & click on the city you will be traveling to below:</label>
+    <div id = "searchBarHotel"></div>
+  </div>
+</div>
+
+
+<div id = "FlightSearch" class="w3-container">
+  <div class="w3-panel w3-padding-16 w3-black w3-opacity w3-card w3-hover-opacity-off">
+    <h2>Make sure your flights are in order</h2>
+    <label>Enter & click below:</label>
+    <div id = "searchBarFlights"></div>
+  </div>
+</div>
+
+
+
+
+
+
 
   <!-- Good offers -->
   <div class="w3-container w3-margin-top  ">
@@ -162,6 +164,17 @@
      </div>
    </div>
  </div>
+
+  
+   <!-- Weather -->
+   
+   <div id = "weatherSearch" class="w3-container">
+    <div class="w3-panel w3-padding-16 w3-black w3-opacity w3-card w3-hover-opacity-off">
+      <h2>What Weather Are You Packing For?</h2>
+      <label>Enter & click on the city you will be traveling to below:</label>
+      <div id = "searchBarWeather"></div>
+    </div>
+  </div>
  
  <!-- Explore Nature -->
  <div class="w3-container ">

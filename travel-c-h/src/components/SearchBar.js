@@ -45,7 +45,7 @@ const SearchBar = ({ setCity }) => {
                     item,
                     style: {
                       backgroundColor:
-                        highlightedIndex === index ? 'lightgray' : 'white',
+                        highlightedIndex === index ? 'grey' : 'dark-grey',
                       fontWeight: selectedItem === item ? 'bold' : 'normal',
                     },
                   })}
