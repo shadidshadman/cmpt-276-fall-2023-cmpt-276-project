@@ -43,9 +43,9 @@
     <!-- Navigation Bar -->
   <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
   <a href="#" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i class="fa fa-map-marker w3-margin-right"></i>TCHub</b></a>
-  <a href="#" class="w3-bar-item w3-button w3-left w3-light-grey w3-mobile">Flights</a>
-  <a href="#" class="w3-bar-item w3-button w3-left w3-light-grey w3-mobile">Hotel</a>
-  <a href="#" class="w3-bar-item w3-button w3-left w3-light-grey w3-mobile">Weather</a>
+  <a href="#FlightSearch" class="w3-bar-item w3-button w3-left w3-light-grey w3-mobile">Flights</a>
+  <a href="#hotelSearch" class="w3-bar-item w3-button w3-left w3-light-grey w3-mobile">Hotel</a>
+  <a href="#weatherSearch" class="w3-bar-item w3-button w3-left w3-light-grey w3-mobile">Weather</a>
   </div>
 
 
@@ -97,9 +97,17 @@
       <!-- Page content -->
 <div class="w3-content" style="max-width:1100px;">
  
+  <div id = "FlightSearch" class="w3-container">
+    <div class="w3-panel w3-padding-16 w3-black w3-opacity w3-card w3-hover-opacity-off">
+      <h2>Make sure your flights are in order</h2>
+      <label>Enter & click below:</label>
+      <div id = "searchBarFlights"></div>
+    </div>
+  </div>
 
-<div id = "hotel" class="w3-container">
-  <div class="w3-panel w3-padding-16 w3-black w3-opacity w3-card w3-hover-opacity-off">
+
+<div id = "hotel" class="w3-container w3-panel w3-padding-16 w3-opacity w3-card w3-hover-opacity-off">
+  <img class="w3-imagef" src="images/hotelbg.jpg" alt="hotelbg" width="100%" height="500">
     <h2>Find out what hotel you are staying at!</h2>
     <label>Enter & click on the city you will be traveling to below:</label>
     <div id = "searchBarHotel"></div>
@@ -107,13 +115,7 @@
 </div>
 
 
-<div id = "FlightSearch" class="w3-container">
-  <div class="w3-panel w3-padding-16 w3-black w3-opacity w3-card w3-hover-opacity-off">
-    <h2>Make sure your flights are in order</h2>
-    <label>Enter & click below:</label>
-    <div id = "searchBarFlights"></div>
-  </div>
-</div>
+
 
 
 
