@@ -6,6 +6,7 @@ const AirPollutionDisplay = ({ airPollutionData }) => {
         return null; // Don't render anything if the data is not available
       }
       return (
+        
   <div>
     <h2>Air Pollution Details</h2>
     <table>
