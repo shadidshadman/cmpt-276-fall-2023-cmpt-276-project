@@ -276,7 +276,7 @@ export default class Flights extends React.Component {
                         </thead>
                         <tbody id = "table-body">
                             {this.getResult().map((element, index) => (
-                                <tr bgcolor = 'white' key={index}>
+                                <tr bgcolor = 'grey' key={index}>
                                     <td>{element.fromCityName}</td> 
                                     <td>{element.originAirport} </td>
                                     <td>{element.toCityName}</td> 
