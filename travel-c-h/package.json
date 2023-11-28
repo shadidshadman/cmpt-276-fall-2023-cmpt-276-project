@@ -2,6 +2,7 @@
   "name": "travel-c-h",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://shadidshadman.github.io/cmpt-276-fall-2023-cmpt-276-project/",
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
