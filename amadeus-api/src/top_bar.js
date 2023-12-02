@@ -13,7 +13,7 @@ export default function TopSection() {
         <div className = "sign-up-support">
           <button>Help</button>
           <button>Login</button>
-          <button id = "sign-up">Sign Up</button>
+          
         </div>
       </div>
     );

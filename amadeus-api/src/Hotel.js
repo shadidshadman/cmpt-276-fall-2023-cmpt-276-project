@@ -305,5 +305,7 @@ class Hotel extends React.Component {
     );
   }
 };
+
+
 export default Hotel;
 
