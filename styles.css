@@ -1,0 +1,39 @@
+body {
+    background-color: #f0f8ff; /* Light blue background */
+  }
+  
+  .w3-bar {
+    background-color: #ff6347; /* Tomato color for the navigation bar */
+  }
+  
+  .w3-bar-item {
+    color: #fff; /* White color for the navigation text */
+  }
+  
+  .w3-button {
+    background-color: #20b2aa; /* LightSeaGreen color for buttons */
+  }
+  
+  .w3-container {
+    background-color: #e0ffff; /* LightCyan color for containers */
+  }
+  
+  h3 {
+    color: #8a2be2; /* BlueViolet color for h3 headings */
+  }
+  
+  .w3-display-container {
+    background-color: #ffe4b5; /* Moccasin color for the header */
+  }
+  
+  .w3-image {
+    border: 5px solid #deb887; /* BurlyWood border for the image */
+  }
+  
+  .myLink {
+    background-color: #f5f5dc; /* Beige color for the tabs */
+  }
+  
+  .w3-half {
+    background-color: #fafad2; /* LightGoldenRodYellow color for the half-width divs */
+  }
