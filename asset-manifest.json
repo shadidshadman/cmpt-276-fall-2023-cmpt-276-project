@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/cmpt-276-fall-2023-cmpt-276-project/static/css/main.c4bbc08d.css",
+    "main.css": "/cmpt-276-fall-2023-cmpt-276-project/static/css/main.6d9d8372.css",
     "main.js": "/cmpt-276-fall-2023-cmpt-276-project/static/js/main.633ce43c.js",
     "static/js/787.3cc24abd.chunk.js": "/cmpt-276-fall-2023-cmpt-276-project/static/js/787.3cc24abd.chunk.js",
     "static/media/6.jpg": "/cmpt-276-fall-2023-cmpt-276-project/static/media/6.74425921116661d5b01f.jpg",
@@ -13,12 +13,12 @@
     "static/media/5.jpg": "/cmpt-276-fall-2023-cmpt-276-project/static/media/5.8a24967d49e4d3160733.jpg",
     "static/media/8.jpg": "/cmpt-276-fall-2023-cmpt-276-project/static/media/8.4e18b82243c18741f62b.jpg",
     "index.html": "/cmpt-276-fall-2023-cmpt-276-project/index.html",
-    "main.c4bbc08d.css.map": "/cmpt-276-fall-2023-cmpt-276-project/static/css/main.c4bbc08d.css.map",
+    "main.6d9d8372.css.map": "/cmpt-276-fall-2023-cmpt-276-project/static/css/main.6d9d8372.css.map",
     "main.633ce43c.js.map": "/cmpt-276-fall-2023-cmpt-276-project/static/js/main.633ce43c.js.map",
     "787.3cc24abd.chunk.js.map": "/cmpt-276-fall-2023-cmpt-276-project/static/js/787.3cc24abd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4bbc08d.css",
+    "static/css/main.6d9d8372.css",
     "static/js/main.633ce43c.js"
   ]
 }
