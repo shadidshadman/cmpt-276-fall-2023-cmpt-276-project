@@ -10,7 +10,8 @@ import {img1,
   img7,
   img8,
   img9} from './images';
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 var imgList = [img1,img2,
   img3,
   img4,
@@ -23,10 +24,8 @@ var imgList = [img1,img2,
 var global_token;
 const getToken = async () => {
     const apiUrl = 'https://api.amadeus.com/v1/security/oauth2/token';
-    const clientId = 'xtU8VJK5vFf7wDosfi8Vs2PC2LahBwRZ';
-    const clientSecret = 'Cc0DarAtHJsfKXZ0';
-    const apikey = "DJHiMrui9ZRlRv5dfuQAzg1dnOHOpGzj";
-    const apisecret = "gxGKuMeB6yUpCq6x";
+    const apikey = "NRaZw0fhT9N10P24mIz6sJ7kjD3vxzQd";
+    const apisecret = "Qv0lGP8At7XlDb3X";
   
     try {
       const response = await fetch(apiUrl, {
@@ -50,9 +49,12 @@ const getToken = async () => {
     }
   };
 
+  
+
 
 function SearchBar(props) {
-  const { city, handleChange, handleSubmit, handleCountryCode, countryCode,handleCheckIn,handleCheckOut,checkIn,checkOut } = props;
+  const { city, handleChange, handleSubmit, handleCountryCode, 
+    countryCode,handleCheckIn,handleCheckOut,checkOutObj, checkInObj } = props;
   return (
     <form className = "hotel-search-form" onSubmit = {handleSubmit}>
       <div className='new-search-container'>
@@ -85,30 +87,41 @@ function SearchBar(props) {
             <br />
 
           <div class="w3-half">
+          <label>Check In:</label>
 
-          <label>Check In:</label> 
-            <input 
-          type = "text" 
+          <label className='DatePicker'>
+          <DatePicker 
+          placeholderText='yyyy-mm-dd'
           className = "w3-input w3-border"
-          placeholder='yyyy-mm-dd'
-          value = {checkIn}
-          onChange={handleCheckIn}
+          selected={checkInObj}
+          onChange = {date => handleCheckIn(date)} 
+          minDate={new Date()}
+          maxDate={new Date(2024,11,31)}
+          dateFormat= "yyyy-MM-dd"
+          wrapperClassName="date-box"
           />
+          </label>
           </div>
 
           <div className="w3-half">
-          <label>Check Out:</label> 
-          <input 
+          <label>Check Out:</label>
+          <label className='DatePicker'> 
+          <DatePicker 
+          placeholderText='yyyy-mm-dd'
           className = "w3-input w3-border"
-          type = "text" 
-          placeholder='yyyy-mm-dd'
-          value = {checkOut}
-          onChange={handleCheckOut}
+          selected={checkOutObj}
+          onChange = {date => handleCheckOut(date)} 
+          minDate={new Date()}
+          maxDate={new Date(2024,11,31)}
+          dateFormat= "yyyy-MM-dd"
+          wrapperClassName='date-box'
           />
+          </label>
           </div>
           
 
         </div>
+        
         <button className='hotel-btn' type = "submit">Search</button>
       </div>
     </form>
@@ -134,14 +147,16 @@ class Hotel extends React.Component {
       hotels: [], // get rate
       countryCode: "",
       cityCode : "",
-      hotelPriceData: [],
       hotelContent: [],
       hotelPrice: [], // get price
       longitude : "",
       latitude : "",
 
       checkIn : "",
-      checkOut : ""
+      checkOut : "",
+      checkInObj : "",
+      checkOutObj : "",
+      loading : false
     };
     // so that we can use "this" keyword in given methods
     this.handleChange = this.handleChange.bind(this);
@@ -151,22 +166,30 @@ class Hotel extends React.Component {
     this.getRating = this.getRating.bind(this);
     this.handleCheckIn = this.handleCheckIn.bind(this);
     this.handleCheckOut = this.handleCheckOut.bind(this);
+    this.getResults = this.getResults.bind(this);
+    this.removeLoading = this.removeLoading.bind(this);
   }
   
-  handleCheckIn(event) {
+  handleCheckIn(date) {
+    const formattedDate = date.toISOString().split('T')[0];
     this.setState({
-      checkIn : event.target.value
+      checkInObj : date,
+      checkIn : formattedDate
     });
+    
   }
 
-  handleCheckOut(event) {
+  handleCheckOut(date) {
+    const formattedDate = date.toISOString().split('T')[0];
     this.setState({
-      checkOut : event.target.value
+      checkOutObj : date,
+      checkOut : formattedDate
     });
   }
 
   // when text is entered into input, city is given the text
   handleChange(event) {
+    
     this.setState({
       city: event.target.value 
     });
@@ -180,7 +203,9 @@ class Hotel extends React.Component {
   handleSubmit(event) {
     //prevent default in order to not reload the web page after submitting
     event.preventDefault();
-   
+    this.setState({
+      loading : true
+    });
     // trigger the hotel search after the city has been inputted
     getToken().then(token =>{
       global_token = token;
@@ -201,10 +226,14 @@ class Hotel extends React.Component {
     try {
       const response = await fetch(url, {headers,
       method: "GET"});
-      if (!response.ok) {
-        throw new Error('Failed to fetch hotels');
-      }
       const content = await response.json();
+      if(content.data === undefined) {
+        this.setState({
+          hotelContent : content.data
+        },() =>  {
+          this.removeLoading();
+        });
+      }
       this.setState({
         cityCode: content.data[0].iataCode,
         hotelContent : content.data,
@@ -275,6 +304,8 @@ class Hotel extends React.Component {
       const content = await response.json();
       this.setState({
         hotelPrice : content.data
+      }, () =>  {
+        this.removeLoading();
       });
     }
     catch(error) {
@@ -282,13 +313,10 @@ class Hotel extends React.Component {
     }
   }
 
-
-
-  render() {   
-    // in order to combine the data from hotel list and hotel search
-    // allows us to print out name, rating, price onto screen.
+  getResults() {
     let res = [];
     var index = 0;
+    if(this.state.hotelPrice !== undefined && this.state.hotelContent !== undefined ) {
         for(let i = 0; i < this.state.hotelPrice.length; i++) {
             for(let k = 0; k < this.state.hotels.length; k++) {
                 if(this.state.hotelPrice[i].hotel.hotelId === this.state.hotels[k].hotelId) {
@@ -299,21 +327,43 @@ class Hotel extends React.Component {
                 } 
             }
         }
+    }
+      return res;
+  }
+
+  removeLoading() {
+    this.setState({
+      loading : false
+    });
+  }
+
+  render() {   
+    // in order to combine the data from hotel list and hotel search
+    // allows us to print out name, rating, price onto screen.
+    
     return (
       <>
-        
-        <SearchBar city = {this.state.city} handleChange = {this.handleChange}
-        handleSubmit = {this.handleSubmit} handleCountryCode = {this.handleCountryCode}
-        countryCode = {this.state.countryCode} checkIn = {this.state.checkIn} checkOut = {this.state.checkOut}
-        handleCheckIn = {this.handleCheckIn} handleCheckOut = {this.handleCheckOut}
+        <SearchBar city = {this.state.city} 
+        handleChange = {this.handleChange}
+        handleSubmit = {this.handleSubmit} 
+        handleCountryCode = {this.handleCountryCode}
+        countryCode = {this.state.countryCode} 
+        checkInObj = {this.state.checkInObj} 
+        checkOutObj = {this.state.checkOutObj}
+        handleCheckIn = {this.handleCheckIn} 
+        handleCheckOut = {this.handleCheckOut}
         />
         <Filters />
+        {this.state.loading === true && (
+          <div className = "spinner"></div>
+        )}
 
-        {/*the scrollable horizontal list*/}
         <div className= "scrollable-container">
+          {(this.state.hotelPrice !== undefined && this.state.hotelContent !== undefined) && 
+           (
         <div className="hotel-output">
           <ul className='horizontal-list'>
-          {res.map((element,index) => (
+          {this.getResults().map((element,index) => (
             <li className = "list-element" key = {element}>
             <img src = {imgList[index % 9]} alt = "hotel" className = "hotel-image" />
               <p>{element.hotel.cityCode} - {element.hotel.name} </p>
@@ -324,7 +374,14 @@ class Hotel extends React.Component {
             </li>
           ))}
           </ul>
-        </div>
+        </div>) 
+        }
+        {this.state.hotelContent === undefined && (
+          <p>Invalid information entered, please re-enter</p>
+        )}
+        {this.state.hotelPrice === undefined && (
+          <p>Invalid date entered, please re-enter</p>
+        )}
         </div>
       </>
     );
