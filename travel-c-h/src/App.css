@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+.DatePicker {
+  display: block;
+  width: 100%;
+}
+
+.date-box {
+  width: 100%;
+}
+
+.spinner {
+  height : 120px;
+  width : 120px;
+  border : 6px solid;
+  border-color: black transparent black transparent;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+.spinner2 {
+  height : 120px;
+  width : 120px;
+  border : 6px solid;
+  border-color: white transparent white transparent;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  to{
+    transform: rotate(360deg);
+  }
+}

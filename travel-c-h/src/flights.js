@@ -1,14 +1,14 @@
 import React from 'react'
 import './w3.css'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 //used for getting the access token in order to use the APIs
 var global_token;
 const getToken = async () => {
     const apiUrl = 'https://api.amadeus.com/v1/security/oauth2/token';
-    const clientId = 'xtU8VJK5vFf7wDosfi8Vs2PC2LahBwRZ';
-    const clientSecret = 'Cc0DarAtHJsfKXZ0';
-    const apikey = "DJHiMrui9ZRlRv5dfuQAzg1dnOHOpGzj";
-    const apisecret = "gxGKuMeB6yUpCq6x";
+    const apikey = "NRaZw0fhT9N10P24mIz6sJ7kjD3vxzQd";
+    const apisecret = "Qv0lGP8At7XlDb3X";
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -32,8 +32,7 @@ const getToken = async () => {
   };
 
 function SearchBar(props) {
-   const {toDestination,fromDestination,from,
-    destination,handleSubmit,getDeparture,departure} = props;
+   const {toDestination,fromDestination,from,destination,handleSubmit,getDeparture,departureObj,tempDate, getTempDate} = props;
     return (
       <form className = "hotel-search-form" onSubmit={handleSubmit}>
         <div className='new-search-container'>
@@ -64,18 +63,32 @@ function SearchBar(props) {
 
             <div className="w3-half"> 
             <label>Arrival Date:</label>
-            <input className = "w3-input w3-border" type = "text" 
-                placeholder='yyyy-mm-dd'
-                onChange = {getDeparture}
-                value = {departure}
+            <label className='DatePicker'>
+            <DatePicker 
+            placeholderText='yyyy-mm-dd'
+            className = "w3-input w3-border"
+            selected={departureObj}
+            onChange = {date => getDeparture(date)} 
+            minDate={new Date()}
+            maxDate={new Date(2024,11,31)}
+            dateFormat= "yyyy-MM-dd"
+            wrapperClassName="date-box"
             />
+          </label>
             </div>
 
             <div className="w3-half"> 
 
             <label>Departure Date:</label>
-            <input className = "w3-input w3-border" type = "text" 
-                placeholder='yyyy-mm-dd'
+            <DatePicker 
+            placeholderText='yyyy-mm-dd'
+            className = "w3-input w3-border"
+            selected={tempDate}
+            onChange = {date => getTempDate(date)} 
+            minDate={new Date()}
+            maxDate={new Date(2024,11,31)}
+            dateFormat= "yyyy-MM-dd"
+            wrapperClassName="date-box"
             />
             </div>
 
@@ -103,8 +116,13 @@ export default class Flights extends React.Component {
           toCity : "",
 
           departure : "",
+          departureObj : "",
+          tempDate : "",
 
-          flightInfo : []
+          originInfo: [],
+          destinationInfo : [],
+          flightInfo : [],
+          loading: false
         };
         // allows the functions to use the "this" keyword
         this.fromDestination = this.fromDestination.bind(this);
@@ -115,24 +133,42 @@ export default class Flights extends React.Component {
         this.getFlightInfo = this.getFlightInfo.bind(this);
         this.getDeparture = this.getDeparture.bind(this);
         this.getResult = this.getResult.bind(this);
+        this.getTempDate = this.getTempDate.bind(this);
+        this.removeLoading = this.removeLoading.bind(this);
     }
 
     // initiates the api calls, they're all chained together
      handleSubmit(event) {
       event.preventDefault();
+      this.setState({
+        loading: true
+      });
       getToken().then(token =>{
         global_token = token;
         this.getDestinationIata();
       }).catch(error => {console.error("error couldn't get token", error)});
       
     }
-
-    // collect data to place into the api url
-    getDeparture(event) {
+    removeLoading() {
       this.setState({
-        departure : event.target.value
+        loading: false
       });
     }
+    getTempDate(date) {
+      this.setState({
+        tempDate : date
+      });
+    }
+
+    // collect data to place into the api url
+    getDeparture(date) {
+      const formattedDate = date.toISOString().split('T')[0];
+      this.setState({
+        departureObj : date,
+        departure : formattedDate
+      });
+    }
+
     fromDestination(event) {
       this.setState({
         from: event.target.value
@@ -158,12 +194,21 @@ export default class Flights extends React.Component {
           method : "GET"
         });
         const content = await response.json();
-        await this.getOriginIata();
+        //await this.getOriginIata();
+        if(content.data[0] === undefined) {
+          this.setState({
+            destinationInfo : content.data[0]
+          }, () => {
+            this.removeLoading();
+          });
+        }
         this.setState({
+          destinationInfo : content.data,
           toIata : content.data[0].iataCode,
           toName : content.data[0].name,
-          toCity : content.data[0].address.cityName
+          toCity : content.data[0].address.cityName,
         }, () => {
+          this.getOriginIata();
         });
       }
       catch(error) {
@@ -184,10 +229,18 @@ export default class Flights extends React.Component {
           method : "GET"
         });
         const content = await response.json();
+        if(content.data[0] === undefined) {
+          this.setState({
+            originInfo : content.data[0]
+          }, () => {
+            this.removeLoading();
+          });
+        }
         this.setState({
+          originInfo : content.data,
           fromIata : content.data[0].iataCode,
           fromName : content.data[0].name,
-          fromCity : content.data[0].address.cityName
+          fromCity : content.data[0].address.cityName,
         }, () => {
           this.getFlightInfo();
         });
@@ -217,6 +270,7 @@ export default class Flights extends React.Component {
            flightInfo : content.data
         }, () => {
           this.getResult();
+          this.removeLoading();
         });
         //console.log(content.data[0].itineraries.length);
       }
@@ -231,6 +285,7 @@ export default class Flights extends React.Component {
     getResult() {
         var res = [];
         let index = 0;
+        if(this.state.originInfo !== undefined && this.state.destinationInfo !== undefined) {
         for(let i = 0; i < this.state.flightInfo.length; i++) {
           let seg_len = this.state.flightInfo[i].itineraries[0].segments.length;
           for(let k = 0; k < seg_len; k++) {
@@ -246,6 +301,7 @@ export default class Flights extends React.Component {
             }
           }
         }
+      }
         return res;
     }
     render() {
@@ -255,11 +311,20 @@ export default class Flights extends React.Component {
         return (
         <>
             
-            <SearchBar toDestination = {this.toDestination} fromDestination = {this.fromDestination} from = {this.from}
-            destination = {this.destination} handleSubmit = {this.handleSubmit} getDeparture = {this.getDeparture}
-            departure = {this.departure}
+            <SearchBar toDestination = {this.toDestination} 
+            fromDestination = {this.fromDestination} 
+            from = {this.from}
+            destination = {this.destination} 
+            handleSubmit = {this.handleSubmit} 
+            getDeparture = {this.getDeparture}
+            departureObj = {this.state.departureObj}
+            getTempDate = {this.getTempDate}
+            tempDate = {this.state.tempDate}
             />
-            {/*NOTE: should probaly place into separate member function/component at a later date*/}
+
+            {this.state.loading === true && (
+              <div className = "spinner2"></div>
+            )}
             <div className = "flight-table">
                 {this.getResult().length > 0 && (
                     <table bgcolor='black'>
@@ -288,6 +353,10 @@ export default class Flights extends React.Component {
                             ))}
                         </tbody>
                     </table>
+                )}
+                {(this.state.originInfo === undefined ||
+                this.state.destinationInfo === undefined) && (
+                  <p>Invalid input, please re-enter information</p>
                 )}
             </div>
             
