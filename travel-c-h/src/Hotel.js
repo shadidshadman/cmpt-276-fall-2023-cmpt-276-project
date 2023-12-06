@@ -128,16 +128,6 @@ function SearchBar(props) {
   );
 }
 
-function Filters() {
-  return (
-    <div className = "filter">
-      <h1>Hotels</h1>
-      <button id = "filter-btn">Filter</button>
-    </div>
-  );
-}
-
-
 class Hotel extends React.Component {
   constructor(props) {
     super(props);
@@ -353,7 +343,6 @@ class Hotel extends React.Component {
         handleCheckIn = {this.handleCheckIn} 
         handleCheckOut = {this.handleCheckOut}
         />
-        <Filters />
         {this.state.loading === true && (
           <div className = "spinner"></div>
         )}
