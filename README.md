@@ -21,6 +21,6 @@ Shadid Shadman
 Jayden Thung
 
 # Setup Instructions
-Can be built locally by downloading our main branch as a zip file, extracting the contents and running npm start in ~/travel-c-h/src (may require an npm install and npm install react-datepicker --save run for components to work) will cause the app to be run at http://localhost:3000/cmpt-276-fall-2023-cmpt-276-project). This will lack images but does show the general outline of the app and feature working api calls and functionality.
+Can be built locally by downloading our main branch as a zip file, extracting the contents and running npm start in ~/travel-app/src (may require an npm install and npm install react-datepicker --save run for components to work) will cause the app to be run at http://localhost:3000/cmpt-276-fall-2023-cmpt-276-project). This will lack images but does show the general outline of the app and feature working api calls and functionality.
 
 Our live production website is viewable in the github project page description and shows images/full fledged design.
