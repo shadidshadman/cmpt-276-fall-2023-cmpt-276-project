@@ -36,11 +36,11 @@ function SearchBar(props) {
     return (
       <form className = "hotel-search-form" onSubmit={handleSubmit}>
         <div className='new-search-container'>
-            <p id = "search-title">Search for Flights</p>
+            <p id = "search-title">Search for flights</p>
           <div className = "search-input">
 
           <div className="w3-half"> 
-          <label>Location Leaving:</label>
+          <label>Departure Location:</label>
             <input type = "text"
              className = "w3-input w3-border"
                 placeholder='City'
@@ -50,7 +50,7 @@ function SearchBar(props) {
             </div>
 
             <div className="w3-half"> 
-            <label>Location Arriving At:</label>
+            <label>Arrival Location:</label>
             <input type = "text" 
                 placeholder='City'
                 className = "w3-input w3-border"

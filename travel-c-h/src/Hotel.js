@@ -63,11 +63,11 @@ function SearchBar(props) {
           
           <div className="w3-half">
 
-            <label>Location</label>
+            <label>Destination Location:</label>
             <input 
             className = "w3-input w3-border"
             type = "text" 
-            placeholder='City Destination'
+            placeholder='City'
             value = {city}
             onChange={handleChange}
             />
@@ -75,11 +75,11 @@ function SearchBar(props) {
           </div>
           
           <div className="w3-half">
-          <label>Country Code:</label>
+          <label>Two Letter Country Code:</label>
           <input type = "text" 
             className = "w3-input w3-border"
             onChange={handleCountryCode}
-            placeholder = " e.g CA"
+            placeholder = " e.g. CA"
             id = "country-code" 
             value = {countryCode} />
             </div>
