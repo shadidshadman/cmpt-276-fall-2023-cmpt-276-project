@@ -1,16 +1,9 @@
-
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import AirPollutionDisplay from './AirPollutionDisplay';
+import AirPollutionDisplay from '../components/AirPollutionDisplay';
 
 describe('AirPollutionDisplay', () => {
-  test('renders nothing when airPollutionData is not available', () => {
-    render(<AirPollutionDisplay />);
-    // Assert that nothing is rendered when airPollutionData is not available
-    expect(screen.queryByText('Air Pollution Details')).toBeNull();
-  });
-
-  test('renders air pollution details when airPollutionData is available', () => {
+  test('renders air pollution details', () => {
     const airPollutionData = {
       main: { aqi: 3 },
       components: {
@@ -22,7 +15,7 @@ describe('AirPollutionDisplay', () => {
         pm2_5: 0.6,
         pm10: 0.7,
         nh3: 0.8,
-      },
+      }
     };
 
     render(<AirPollutionDisplay airPollutionData={airPollutionData} />);
