@@ -87,3 +87,6 @@ table {
 table, th, td {
   border: 1px solid white;
 }
+.new-search-container {
+  height: 200px;
+}
