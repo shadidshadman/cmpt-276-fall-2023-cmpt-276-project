@@ -265,7 +265,6 @@ export default class Flights extends React.Component {
       
         const content = await response.json();
         //data.push(content.data);
-        
         this.setState({
            flightInfo : content.data
         }, () => {
@@ -285,7 +284,8 @@ export default class Flights extends React.Component {
     getResult() {
         var res = [];
         let index = 0;
-        if(this.state.originInfo !== undefined && this.state.destinationInfo !== undefined) {
+        if(this.state.originInfo !== undefined && this.state.destinationInfo !== undefined 
+          && this.state.flightInfo !== undefined) {
         for(let i = 0; i < this.state.flightInfo.length; i++) {
           let seg_len = this.state.flightInfo[i].itineraries[0].segments.length;
           for(let k = 0; k < seg_len; k++) {
@@ -355,7 +355,8 @@ export default class Flights extends React.Component {
                     </table>
                 )}
                 {(this.state.originInfo === undefined ||
-                this.state.destinationInfo === undefined) && (
+                this.state.destinationInfo === undefined || 
+                this.state.flightInfo === undefined) && (
                   <p>Invalid input, please re-enter information</p>
                 )}
             </div>

@@ -68,6 +68,7 @@
   to{
     transform: rotate(360deg);
   }
+}
 
 .weather-widgets {
   display: flex;

@@ -376,11 +376,9 @@ class Hotel extends React.Component {
           </ul>
         </div>) 
         }
-        {this.state.hotelContent === undefined && (
+        {(this.state.hotelContent === undefined 
+        || this.state.hotelPrice === undefined) && (
           <p>Invalid information entered, please re-enter</p>
-        )}
-        {this.state.hotelPrice === undefined && (
-          <p>Invalid date entered, please re-enter</p>
         )}
         </div>
       </>
