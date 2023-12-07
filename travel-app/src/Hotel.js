@@ -99,6 +99,9 @@ function SearchBar(props) {
           maxDate={new Date(2024,11,31)}
           dateFormat= "yyyy-MM-dd"
           wrapperClassName="date-box"
+          onKeyDown={(e) => {
+            e.preventDefault();
+          }}
           />
           </label>
           </div>
@@ -115,6 +118,9 @@ function SearchBar(props) {
           maxDate={new Date(2024,11,31)}
           dateFormat= "yyyy-MM-dd"
           wrapperClassName='date-box'
+          onKeyDown={(e) => {
+            e.preventDefault();
+          }}
           />
           </label>
           </div>

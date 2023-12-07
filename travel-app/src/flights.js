@@ -59,10 +59,8 @@ function SearchBar(props) {
             />
             </div>
 
-            <br />
-
             <div className="w3-half"> 
-            <label>Arrival Date:</label>
+            <label>Departure Date:</label>
             <label className='DatePicker'>
             <DatePicker 
             placeholderText='yyyy-mm-dd'
@@ -73,27 +71,15 @@ function SearchBar(props) {
             maxDate={new Date(2024,11,31)}
             dateFormat= "yyyy-MM-dd"
             wrapperClassName="date-box"
+            onKeyDown={(e) => {
+              e.preventDefault();
+            }}
             />
           </label>
+          <button type = "submit">Search</button>
             </div>
-
-            <div className="w3-half"> 
-
-            <label>Departure Date:</label>
-            <DatePicker 
-            placeholderText='yyyy-mm-dd'
-            className = "w3-input w3-border"
-            selected={tempDate}
-            onChange = {date => getTempDate(date)} 
-            minDate={new Date()}
-            maxDate={new Date(2024,11,31)}
-            dateFormat= "yyyy-MM-dd"
-            wrapperClassName="date-box"
-            />
-            </div>
-
+            
           </div>
-          <button className='hotel-btn' type = "submit">Search</button>
         </div>
       </form>
     );
@@ -188,6 +174,14 @@ export default class Flights extends React.Component {
         Accept: "application/vnd.amadeus+json",
         Authorization: `Bearer ${global_token}`
       };
+      if(this.state.destination === "") {
+        this.setState({
+          destinationInfo : undefined
+        }, () => {
+          this.removeLoading();
+        });
+      }
+      else {
       try {
         const response = await fetch(url,{
           headers,
@@ -214,6 +208,7 @@ export default class Flights extends React.Component {
       catch(error) {
         console.error("couldn't get destination IATA", error);
       }
+    }
     }
 
     async getOriginIata() {
@@ -296,6 +291,7 @@ export default class Flights extends React.Component {
               res[index].destinationAirport = this.state.toName;
               res[index].fromCityName = this.state.fromCity;
               res[index].toCityName = this.state.toCity;
+              res[index].price.currency = "CAD";
               index++;
               break;
             }
@@ -321,7 +317,7 @@ export default class Flights extends React.Component {
             getTempDate = {this.getTempDate}
             tempDate = {this.state.tempDate}
             />
-
+            <div className = "output">
             {this.state.loading === true && (
               <div className = "spinner2"></div>
             )}
@@ -346,7 +342,7 @@ export default class Flights extends React.Component {
                                     <td>{element.originAirport} </td>
                                     <td>{element.toCityName}</td> 
                                     <td>{element.destinationAirport}</td>
-                                    <td>${element.price.grandTotal} {element.price.currency}</td>
+                                    <td>${(element.price.grandTotal * 1.46).toFixed(2)} {element.price.currency}</td>
                                     <td>{element.itineraries[0].segments[0].departure.at}</td>
                                     <td>{element.itineraries[0].segments[element.itineraries[0].segments.length - 1].arrival.at}</td>
                                 </tr>
@@ -360,6 +356,8 @@ export default class Flights extends React.Component {
                   <p>Invalid input, please re-enter information</p>
                 )}
             </div>
+            </div>
+            
             
         </>
         );
