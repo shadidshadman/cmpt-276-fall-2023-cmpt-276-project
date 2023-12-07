@@ -40,18 +40,22 @@ function SearchBar(props) {
           <div className = "search-input">
 
           <div className="w3-half"> 
-          <label>Departure Location:</label>
-            <input type = "text"
-             className = "w3-input w3-border"
-                placeholder='City'
-                onChange={fromDestination} 
-                value = {from}
+          <label htmlFor="Departure">Departure Location:</label>
+            <input 
+              id="Departure"
+              type = "text"
+              className = "w3-input w3-border"
+              placeholder='City'
+              onChange={fromDestination} 
+              value = {from}
             />
             </div>
 
             <div className="w3-half"> 
-            <label>Arrival Location:</label>
-            <input type = "text" 
+            <label htmlFor="Arrival">Arrival Location:</label>
+            <input 
+                id = "Arrival"
+                type = "text" 
                 placeholder='City'
                 className = "w3-input w3-border"
                 onChange={toDestination}
