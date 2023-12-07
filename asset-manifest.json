@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/cmpt-276-fall-2023-cmpt-276-project/static/css/main.e9f7a5ee.css",
-    "main.js": "/cmpt-276-fall-2023-cmpt-276-project/static/js/main.49f19734.js",
+    "main.css": "/cmpt-276-fall-2023-cmpt-276-project/static/css/main.056735bf.css",
+    "main.js": "/cmpt-276-fall-2023-cmpt-276-project/static/js/main.560c2fc1.js",
     "static/js/787.21a9c961.chunk.js": "/cmpt-276-fall-2023-cmpt-276-project/static/js/787.21a9c961.chunk.js",
     "static/media/6.jpg": "/cmpt-276-fall-2023-cmpt-276-project/static/media/6.74425921116661d5b01f.jpg",
     "static/media/9.jpg": "/cmpt-276-fall-2023-cmpt-276-project/static/media/9.af20c6109e4bb130ede9.jpg",
@@ -13,12 +13,12 @@
     "static/media/5.jpg": "/cmpt-276-fall-2023-cmpt-276-project/static/media/5.8a24967d49e4d3160733.jpg",
     "static/media/8.jpg": "/cmpt-276-fall-2023-cmpt-276-project/static/media/8.4e18b82243c18741f62b.jpg",
     "index.html": "/cmpt-276-fall-2023-cmpt-276-project/index.html",
-    "main.e9f7a5ee.css.map": "/cmpt-276-fall-2023-cmpt-276-project/static/css/main.e9f7a5ee.css.map",
-    "main.49f19734.js.map": "/cmpt-276-fall-2023-cmpt-276-project/static/js/main.49f19734.js.map",
+    "main.056735bf.css.map": "/cmpt-276-fall-2023-cmpt-276-project/static/css/main.056735bf.css.map",
+    "main.560c2fc1.js.map": "/cmpt-276-fall-2023-cmpt-276-project/static/js/main.560c2fc1.js.map",
     "787.21a9c961.chunk.js.map": "/cmpt-276-fall-2023-cmpt-276-project/static/js/787.21a9c961.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e9f7a5ee.css",
-    "static/js/main.49f19734.js"
+    "static/css/main.056735bf.css",
+    "static/js/main.560c2fc1.js"
   ]
 }
