@@ -31,60 +31,64 @@ const getToken = async () => {
     }
   };
 
-function SearchBar(props) {
-   const {toDestination,fromDestination,from,destination,handleSubmit,getDeparture,departureObj,tempDate, getTempDate} = props;
-    return (
-      <form className = "hotel-search-form" onSubmit={handleSubmit}>
-        <div className='new-search-container'>
-            <p id = "search-title">Search for flights</p>
-          <div className = "search-input">
-
-          <div className="w3-half"> 
-          <label htmlFor="Departure">Departure Location:</label>
-            <input 
-              id="Departure"
-              type = "text"
-              className = "w3-input w3-border"
-              placeholder='City'
-              onChange={fromDestination} 
-              value = {from}
-            />
-            </div>
-
-            <div className="w3-half"> 
-            <label htmlFor="Arrival">Arrival Location:</label>
-            <input 
+  function SearchBar(props) {
+    const {toDestination,fromDestination,from,destination,handleSubmit,getDeparture,departureObj,tempDate, getTempDate} = props;
+     return (
+       <form className = "hotel-search-form" onSubmit={handleSubmit}>
+         <div className='new-search-container'>
+             <p id = "search-title">Search for flights</p>
+           <div className = "search-input">
+ 
+           <div className="w3-half"> 
+           <label htmlFor="Departure">Departure Location:</label>
+             <input 
+                id = "Departure"
+                type = "text"
+                className = "w3-input w3-border"
+                 placeholder='City'
+                 onChange={fromDestination} 
+                 value = {from}
+             />
+             </div>
+ 
+             <div className="w3-half"> 
+             <label htmlFor="Arrival">Arrival Location:</label>
+             <input 
                 id = "Arrival"
                 type = "text" 
-                placeholder='City'
-                className = "w3-input w3-border"
-                onChange={toDestination}
-                value = {destination}
-            />
-            </div>
-
-            <div className="w3-half"> 
-
-            <label htmlFor="D-date">Departure Date:</label>
-            <DatePicker 
-            id = "D-date"
-            placeholderText='yyyy-mm-dd'
-            className = "w3-input w3-border"
-            selected={tempDate}
-            onChange = {date => getTempDate(date)} 
-            minDate={new Date()}
-            maxDate={new Date(2024,11,31)}
-            dateFormat= "yyyy-MM-dd"
-            wrapperClassName="date-box"
-            />
-            </div>
-
-          </div>
-          <button className='hotel-btn' type = "submit">Search</button>
-        </div>
-      </form>
-    );
-  }
+                 placeholder='City'
+                 className = "w3-input w3-border"
+                 onChange={toDestination}
+                 value = {destination}
+             />
+             </div>
+ 
+             <div className="w3-half"> 
+             <label htmlFor="Dep-date">Departure Date:</label>
+             <label className='DatePicker'>
+             <DatePicker 
+             id = "Dep-date"
+             placeholderText='yyyy-mm-dd'
+             className = "w3-input w3-border"
+             selected={departureObj}
+             onChange = {date => getDeparture(date)} 
+             minDate={new Date()}
+             maxDate={new Date(2024,11,31)}
+             dateFormat= "yyyy-MM-dd"
+             wrapperClassName="date-box"
+             onKeyDown={(e) => {
+               e.preventDefault();
+             }}
+             />
+           </label>
+           <button type = "submit">Search</button>
+             </div>
+             
+           </div>
+         </div>
+       </form>
+     );
+   } 
 
 export default class Flights extends React.Component {
     constructor(props) {
