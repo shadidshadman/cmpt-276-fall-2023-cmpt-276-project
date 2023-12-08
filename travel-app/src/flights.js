@@ -31,64 +31,59 @@ const getToken = async () => {
     }
   };
 
-  function SearchBar(props) {
-    const {toDestination,fromDestination,from,destination,handleSubmit,getDeparture,departureObj,tempDate, getTempDate} = props;
-     return (
-       <form className = "hotel-search-form" onSubmit={handleSubmit}>
-         <div className='new-search-container'>
-             <p id = "search-title">Search for flights</p>
-           <div className = "search-input">
- 
-           <div className="w3-half"> 
-           <label htmlFor="Departure">Departure Location:</label>
-             <input 
-                id = "Departure"
-                type = "text"
-                className = "w3-input w3-border"
-                 placeholder='City'
-                 onChange={fromDestination} 
-                 value = {from}
-             />
-             </div>
- 
-             <div className="w3-half"> 
-             <label htmlFor="Arrival">Arrival Location:</label>
-             <input 
-                id = "Arrival"
-                type = "text" 
-                 placeholder='City'
-                 className = "w3-input w3-border"
-                 onChange={toDestination}
-                 value = {destination}
-             />
-             </div>
- 
-             <div className="w3-half"> 
-             <label htmlFor="Dep-date">Departure Date:</label>
-             <label className='DatePicker'>
-             <DatePicker 
-             id = "Dep-date"
-             placeholderText='yyyy-mm-dd'
+function SearchBar(props) {
+   const {toDestination,fromDestination,from,destination,handleSubmit,getDeparture,departureObj,tempDate, getTempDate} = props;
+    return (
+      <form className = "hotel-search-form" onSubmit={handleSubmit}>
+        <div className='new-search-container'>
+            <p id = "search-title">Search for flights</p>
+          <div className = "search-input">
+
+          <div className="w3-half"> 
+          <label>Departure Location:</label>
+            <input type = "text"
              className = "w3-input w3-border"
-             selected={departureObj}
-             onChange = {date => getDeparture(date)} 
-             minDate={new Date()}
-             maxDate={new Date(2024,11,31)}
-             dateFormat= "yyyy-MM-dd"
-             wrapperClassName="date-box"
-             onKeyDown={(e) => {
-               e.preventDefault();
-             }}
-             />
-           </label>
-           <button type = "submit">Search</button>
-             </div>
-             
-           </div>
-         </div>
-       </form>
-     );
-   } 
+                placeholder='City'
+                onChange={fromDestination} 
+                value = {from}
+            />
+            </div>
+
+            <div className="w3-half"> 
+            <label>Arrival Location:</label>
+            <input type = "text" 
+                placeholder='City'
+                className = "w3-input w3-border"
+                onChange={toDestination}
+                value = {destination}
+            />
+            </div>
+
+            <div className="w3-half"> 
+            <label>Departure Date:</label>
+            <label className='DatePicker'>
+            <DatePicker 
+            placeholderText='yyyy-mm-dd'
+            className = "w3-input w3-border"
+            selected={departureObj}
+            onChange = {date => getDeparture(date)} 
+            minDate={new Date()}
+            maxDate={new Date(2024,11,31)}
+            dateFormat= "yyyy-MM-dd"
+            wrapperClassName="date-box"
+            onKeyDown={(e) => {
+              e.preventDefault();
+            }}
+            />
+          </label>
+          <button type = "submit">Search</button>
+            </div>
+            
+          </div>
+        </div>
+      </form>
+    );
+  }
 
 export default class Flights extends React.Component {
     constructor(props) {
@@ -179,6 +174,14 @@ export default class Flights extends React.Component {
         Accept: "application/vnd.amadeus+json",
         Authorization: `Bearer ${global_token}`
       };
+      if(this.state.destination === "") {
+        this.setState({
+          destinationInfo : undefined
+        }, () => {
+          this.removeLoading();
+        });
+      }
+      else {
       try {
         const response = await fetch(url,{
           headers,
@@ -206,6 +209,7 @@ export default class Flights extends React.Component {
         console.error("couldn't get destination IATA", error);
       }
     }
+    }
 
     async getOriginIata() {
       const baseURL = "https://api.amadeus.com/v1/reference-data"
@@ -214,6 +218,14 @@ export default class Flights extends React.Component {
         Accept: "application/vnd.amadeus+json",
         Authorization: `Bearer ${global_token}`
       };
+      if(this.state.from === "") {
+        this.setState({
+          destinationInfo : undefined
+        }, () => {
+          this.removeLoading();
+        });
+      }
+      else {
       try {
         const response = await fetch(url,{
           headers,
@@ -241,6 +253,7 @@ export default class Flights extends React.Component {
         console.error("couldn't get origin IATA", error);
       }
     }
+    }
 
     async getFlightInfo() {
       const baseURL = "https://api.amadeus.com/v2/shopping";
@@ -256,7 +269,6 @@ export default class Flights extends React.Component {
       
         const content = await response.json();
         //data.push(content.data);
-        
         this.setState({
            flightInfo : content.data
         }, () => {
@@ -276,7 +288,8 @@ export default class Flights extends React.Component {
     getResult() {
         var res = [];
         let index = 0;
-        if(this.state.originInfo !== undefined && this.state.destinationInfo !== undefined) {
+        if(this.state.originInfo !== undefined && this.state.destinationInfo !== undefined 
+          && this.state.flightInfo !== undefined) {
         for(let i = 0; i < this.state.flightInfo.length; i++) {
           let seg_len = this.state.flightInfo[i].itineraries[0].segments.length;
           for(let k = 0; k < seg_len; k++) {
@@ -287,6 +300,7 @@ export default class Flights extends React.Component {
               res[index].destinationAirport = this.state.toName;
               res[index].fromCityName = this.state.fromCity;
               res[index].toCityName = this.state.toCity;
+              res[index].price.currency = "CAD";
               index++;
               break;
             }
@@ -312,7 +326,7 @@ export default class Flights extends React.Component {
             getTempDate = {this.getTempDate}
             tempDate = {this.state.tempDate}
             />
-
+            <div className = "output">
             {this.state.loading === true && (
               <div className = "spinner2"></div>
             )}
@@ -337,7 +351,7 @@ export default class Flights extends React.Component {
                                     <td>{element.originAirport} </td>
                                     <td>{element.toCityName}</td> 
                                     <td>{element.destinationAirport}</td>
-                                    <td>${element.price.grandTotal} {element.price.currency}</td>
+                                    <td>${(element.price.grandTotal * 1.46).toFixed(2)} {element.price.currency}</td>
                                     <td>{element.itineraries[0].segments[0].departure.at}</td>
                                     <td>{element.itineraries[0].segments[element.itineraries[0].segments.length - 1].arrival.at}</td>
                                 </tr>
@@ -346,10 +360,13 @@ export default class Flights extends React.Component {
                     </table>
                 )}
                 {(this.state.originInfo === undefined ||
-                this.state.destinationInfo === undefined) && (
+                this.state.destinationInfo === undefined || 
+                this.state.flightInfo === undefined) && (
                   <p>Invalid input, please re-enter information</p>
                 )}
             </div>
+            </div>
+            
             
         </>
         );
