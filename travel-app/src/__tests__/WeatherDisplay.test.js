@@ -3,7 +3,10 @@ import { render, screen } from '@testing-library/react';
 import WeatherDisplay from '../components/WeatherDisplay';
 
 describe('WeatherDisplay', () => {
-  test('renders weather details', () => {
+    //////////
+    // Unit Tests
+    //////////
+    test('renders weather details', () => {
     const weatherData = {
         main: { 
             temp: 30,

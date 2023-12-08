@@ -3,7 +3,10 @@ import { render, screen } from '@testing-library/react';
 import AirPollutionDisplay from '../components/AirPollutionDisplay.js';
 
 describe('AirPollutionDisplay', () => {
-  test('renders air pollution details', () => {
+    //////////
+    // Unit Tests
+    //////////
+    test('renders air pollution details', () => {
     const airPollutionData = {
       main: { aqi: 3 },
       components: {

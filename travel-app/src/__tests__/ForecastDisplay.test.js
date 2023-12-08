@@ -3,7 +3,11 @@ import { render, screen } from '@testing-library/react';
 import ForecastDisplay from '../components/ForecastDisplay.js';
 
 describe('ForecastDisplay', () => {
-  test('renders forecast details', () => {
+
+    //////////
+    // Unit Tests
+    //////////
+    test('renders forecast details', () => {
     const forecastData = {
         dt: 1000,
         main: {
@@ -31,8 +35,8 @@ describe('ForecastDisplay', () => {
     // Assert that the component renders the forecast details correctly
     expect(forecastData.dt).toBe(1000);
     expect(forecastData.main.temp).toBe(30);
-    expect(forecastData.weather.icon).toBe('Sun');
-    expect(forecastData.weather.description).toBe('Clear Sky');
+    expect(forecastData.weather[0].icon).toBe('Sun');
+    expect(forecastData.weather[0].description).toBe('Clear Sky');
     expect(forecastData.wind.speed).toBe(1);
     expect(forecastData.clouds.all).toBe(2);
     expect(forecastData.pop).toBe(3);

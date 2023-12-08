@@ -6,6 +6,9 @@ import SearchBar from '../components/SearchBar.js';
 jest.mock('axios');
 
 describe('SearchBar component', () => {
+    //////////
+    // Integration Test
+    //////////
     it('fetches data', async () => {
       const mockItems = {City1, City2};
       const mockInput = 'MockInput';

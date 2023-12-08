@@ -1,12 +1,16 @@
 import React from 'react';
 import { render, waitFor} from '@testing-library/react';
 import axios from 'axios';
+import '@testing-library/jest-dom/extend-expect';
 import AllData from '../components/AllData.js';
 
 jest.mock('axios');
 
 describe('AllData component', () => {
-  it('fetches data', async () => {
+    //////////
+    // Integration Tests (3 features tested)
+    //////////
+    it('fetches data', async () => {
     const mockWeatherData = {
         main: { 
             temp: 30,

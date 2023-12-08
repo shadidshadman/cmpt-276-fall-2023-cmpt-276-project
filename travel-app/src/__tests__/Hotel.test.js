@@ -13,6 +13,9 @@ global.fetch = jest.fn(() =>
 );
 
 describe('Hotel Component', () => {
+    //////////
+    // Unit Tests
+    //////////
   it('renders SearchBar form', () => {
       render(<Hotel />);
 
@@ -23,6 +26,9 @@ describe('Hotel Component', () => {
       expect(screen.getByText('Search')).toBeInTheDocument();
     });
 
+    //////////
+    // Integration Tests (3 features tested)
+    //////////
   it('fetches data from API', async () => {
     render(<Hotel />);
 
