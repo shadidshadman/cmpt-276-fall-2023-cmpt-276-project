@@ -89,3 +89,4 @@ describe('AllData component', () => {
       expect(setAirPollutionData).toHaveBeenCalledWith(mockAirPollutionData);
     });
   });
+

@@ -66,9 +66,10 @@ function SearchBar(props) {
             <br />
 
             <div className="w3-half"> 
-            <label>Arrival Date:</label>
+            <label htmlFor="A-date">Arrival Date:</label>
             <label className='DatePicker'>
             <DatePicker 
+            id = "A-date"
             placeholderText='yyyy-mm-dd'
             className = "w3-input w3-border"
             selected={departureObj}
@@ -83,8 +84,9 @@ function SearchBar(props) {
 
             <div className="w3-half"> 
 
-            <label>Departure Date:</label>
+            <label htmlFor="D-date">Departure Date:</label>
             <DatePicker 
+            id = "D-date"
             placeholderText='yyyy-mm-dd'
             className = "w3-input w3-border"
             selected={tempDate}

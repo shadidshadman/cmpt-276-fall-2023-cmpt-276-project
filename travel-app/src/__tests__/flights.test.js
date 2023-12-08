@@ -4,6 +4,14 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/extend-expect';
 import Flights from '../flights.js';
 
+// Mocking the global fetch function
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ data: [] }),
+    ok: true,
+  })
+);
+
 describe('Flights Component', () => {
     it('renders SearchBar form', () => {
         render(<Flights />);
@@ -15,37 +23,65 @@ describe('Flights Component', () => {
         expect(screen.getByText('Search')).toBeInTheDocument();
       });
 
-      test('getOriginIata function works as expected', async () => {
-        // Mock the state
-
-
-
+      it('fetches data from API', async () => {
         render(<Flights />);
-      
-        // Set the state of the component
-        userEvent.click(screen.getByText('Search'));
-      
-        // Wait for the asynchronous operations to complete
-        await waitFor(() => {
-
-        });
-      });
-
-      test('getFlightInfo function works as expected', async () => {
-        // Mock the state
-        
-
-
-        render(<Flights />);
-      
-        // Set the state of the component
-        userEvent.click(screen.getByText('Search'));
-      
-        // Wait for the asynchronous operations to complete
-        await waitFor(() => {
-
-        });
-      });
-
     
+        //Mock the getToken function
+        global.fetch.mockResolvedValueOnce({
+          json: () => Promise.resolve({ access_token: 'mockToken' }),
+          ok: true,
+        });
+    
+        // Mock API response for getDestinationIata
+        global.fetch.mockResolvedValueOnce({
+          json: () => Promise.resolve({ 
+            data: { 
+              iataCode: 'YVR', 
+              name: 'Vancouver International Airport',
+              address: {
+                  cityName: Vancouver
+              }
+            }
+            }),
+          ok: true,
+        });
+    
+        // Mock API response for getOriginIata
+        global.fetch.mockResolvedValueOnce({
+            json: () => Promise.resolve({ 
+              data: { 
+                  iataCode: 'YYZ', 
+                  name: 'Toronto Pearson International Airport',
+                  address: {
+                      cityName: Toronto
+                  }
+                }
+                }),
+            ok: true,
+          });
+    
+        // Mock API response for getFlightInfo
+        global.fetch.mockResolvedValueOnce({
+          json: () => Promise.resolve({ 
+            data: 'AC123' }),
+          ok: true,
+        });
+    
+        // Simulate user interactions
+        fireEvent.change(screen.getByLabelText('Departure Location:'), { target: { value: 'Toronto' } });
+        fireEvent.change(screen.getByLabelText('Arrival Location:'), { target: { value: 'Vancouver' } });
+        fireEvent.change(screen.getByLabelText('Departure Date:'), { target: { value: '2023-01-01' } });
+        fireEvent.change(screen.getByLabelText('Arrival Date:'), { target: { value: '2023-01-07' } });
+
+        fireEvent.click(screen.getByText('Search'));
+
+        // Wait for the loading spinner to disappear
+        await waitFor(() => expect(screen.queryByTestId('spinner2')).not.toBeInTheDocument());
+
+        // Assertions
+        expect(screen.getByText('Toronto')).toBeInTheDocument();
+        expect(screen.getByText('Toronto Pearson International Airport')).toBeInTheDocument();
+        expect(screen.getByText('Vancouver')).toBeInTheDocument();
+        expect(screen.getByText('Vancouver International Airport')).toBeInTheDocument();
+      });
   });

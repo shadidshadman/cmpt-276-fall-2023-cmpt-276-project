@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import AirPollutionDisplay from '../components/AirPollutionDisplay';
+import AirPollutionDisplay from '../components/AirPollutionDisplay.js';
 
 describe('AirPollutionDisplay', () => {
   test('renders air pollution details', () => {

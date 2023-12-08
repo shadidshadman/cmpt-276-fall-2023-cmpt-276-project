@@ -4,7 +4,7 @@ import WeatherDisplay from '../components/WeatherDisplay';
 
 describe('WeatherDisplay', () => {
   test('renders weather details', () => {
-    const mockWeatherData = {
+    const weatherData = {
         main: { 
             temp: 30,
             feels_like: 31,
@@ -25,7 +25,6 @@ describe('WeatherDisplay', () => {
         timezone: 100,
         dt: 1000,
         };
-    });
 
     render(<WeatherDisplay weatherData={weatherData} />);
 
@@ -35,8 +34,9 @@ describe('WeatherDisplay', () => {
     expect(weatherData.wind.speed).toBe(2.00);
     expect(weatherData.visibility).toBe(5000);
     expect(weatherData.clouds.all).toBe(100);
-    expect(weatherData.weather.icon).toBe('Sun');
-    expect(weatherData.weather.description).toBe('Clear Sky');
+    expect(weatherData.weather[0].icon).toBe('Sun');
+    expect(weatherData.weather[0].description).toBe('Clear Sky');
     expect(weatherData.timezone).toBe(100);
     expect(weatherData.dt).toBe(1000);
+  });
 });

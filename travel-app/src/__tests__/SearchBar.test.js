@@ -7,7 +7,7 @@ jest.mock('axios');
 
 describe('SearchBar component', () => {
     it('fetches data', async () => {
-      const mockItems = {};
+      const mockItems = {City1, City2};
       const mockInput = 'MockInput';
   
       axios.get.mockResolvedValueOnce({ data: mockItems });

@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ForecastDisplay from '../components/ForecastDisplay';
+import ForecastDisplay from '../components/ForecastDisplay.js';
 
 describe('ForecastDisplay', () => {
   test('renders forecast details', () => {
-    const mockForecastData = {
+    const forecastData = {
         dt: 1000,
         main: {
         temp: 30,
