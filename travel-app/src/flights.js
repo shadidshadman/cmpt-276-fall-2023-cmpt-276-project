@@ -218,6 +218,14 @@ export default class Flights extends React.Component {
         Accept: "application/vnd.amadeus+json",
         Authorization: `Bearer ${global_token}`
       };
+      if(this.state.from === "") {
+        this.setState({
+          destinationInfo : undefined
+        }, () => {
+          this.removeLoading();
+        });
+      }
+      else {
       try {
         const response = await fetch(url,{
           headers,
@@ -244,6 +252,7 @@ export default class Flights extends React.Component {
       catch(error) {
         console.error("couldn't get origin IATA", error);
       }
+    }
     }
 
     async getFlightInfo() {
