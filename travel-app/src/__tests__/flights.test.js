@@ -21,7 +21,6 @@ describe('Flights Component', () => {
   
         expect(screen.getByLabelText('Departure Location:')).toBeInTheDocument();
         expect(screen.getByLabelText('Arrival Location:')).toBeInTheDocument();
-        expect(screen.getByLabelText('Arrival Date:')).toBeInTheDocument();
         expect(screen.getByLabelText('Departure Date:')).toBeInTheDocument();
         expect(screen.getByText('Search')).toBeInTheDocument();
     });
@@ -77,7 +76,6 @@ describe('Flights Component', () => {
     fireEvent.change(screen.getByLabelText('Departure Location:'), { target: { value: 'Toronto' } });
     fireEvent.change(screen.getByLabelText('Arrival Location:'), { target: { value: 'Vancouver' } });
     fireEvent.change(screen.getByLabelText('Departure Date:'), { target: { value: '2023-01-01' } });
-    fireEvent.change(screen.getByLabelText('Arrival Date:'), { target: { value: '2023-01-07' } });
 
     fireEvent.click(screen.getByText('Search'));
 

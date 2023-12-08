@@ -63,25 +63,6 @@ function SearchBar(props) {
             />
             </div>
 
-            <br />
-
-            <div className="w3-half"> 
-            <label htmlFor="A-date">Arrival Date:</label>
-            <label className='DatePicker'>
-            <DatePicker 
-            id = "A-date"
-            placeholderText='yyyy-mm-dd'
-            className = "w3-input w3-border"
-            selected={departureObj}
-            onChange = {date => getDeparture(date)} 
-            minDate={new Date()}
-            maxDate={new Date(2024,11,31)}
-            dateFormat= "yyyy-MM-dd"
-            wrapperClassName="date-box"
-            />
-          </label>
-            </div>
-
             <div className="w3-half"> 
 
             <label htmlFor="D-date">Departure Date:</label>
