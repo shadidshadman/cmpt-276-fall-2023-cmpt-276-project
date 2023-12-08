@@ -63,8 +63,9 @@ function SearchBar(props) {
           
           <div className="w3-half">
 
-            <label>Destination Location:</label>
+            <label htmlFor="Location">Destination Location:</label>
             <input 
+            id = "Location"
             className = "w3-input w3-border"
             type = "text" 
             placeholder='City'
@@ -75,8 +76,9 @@ function SearchBar(props) {
           </div>
           
           <div className="w3-half">
-          <label>Two Letter Country Code:</label>
-          <input type = "text" 
+          <label htmlFor="country-code">Two Letter Country Code:</label>
+          <input 
+            type = "text" 
             className = "w3-input w3-border"
             onChange={handleCountryCode}
             placeholder = " e.g. CA"
@@ -87,10 +89,10 @@ function SearchBar(props) {
             <br />
 
           <div class="w3-half">
-          <label>Check In:</label>
-
+          <label htmlFor = "CheckIn">Check In:</label>
           <label className='DatePicker'>
           <DatePicker 
+          id = "CheckIn"
           placeholderText='yyyy-mm-dd'
           className = "w3-input w3-border"
           selected={checkInObj}
@@ -107,9 +109,10 @@ function SearchBar(props) {
           </div>
 
           <div className="w3-half">
-          <label>Check Out:</label>
+          <label htmlFor="CheckOut">Check Out:</label>
           <label className='DatePicker'> 
           <DatePicker 
+          id = "CheckOut"
           placeholderText='yyyy-mm-dd'
           className = "w3-input w3-border"
           selected={checkOutObj}
