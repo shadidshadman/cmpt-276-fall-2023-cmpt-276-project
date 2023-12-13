@@ -7,8 +7,8 @@ import "react-datepicker/dist/react-datepicker.css";
 var global_token;
 const getToken = async () => {
     const apiUrl = 'https://api.amadeus.com/v1/security/oauth2/token';
-    const apikey = "NRaZw0fhT9N10P24mIz6sJ7kjD3vxzQd";
-    const apisecret = "Qv0lGP8At7XlDb3X";
+    const apikey = "8Scu4JiUEJnquAgpDbqyIOZjMHQOgAyD";
+    const apisecret = "SNQCPQb5a80UeCqj";
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
